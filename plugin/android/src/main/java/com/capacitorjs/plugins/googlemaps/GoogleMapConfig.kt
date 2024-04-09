@@ -17,6 +17,8 @@ class GoogleMapConfig(fromJSONObject: JSONObject) {
     var devicePixelRatio: Float = 1.00f
     var styles: String? = null
     var mapId: String? = null
+    var minZoom: Int? = null
+    var maxZoom: Int? = null
 
     init {
         if (!fromJSONObject.has("width")) {
@@ -76,6 +78,8 @@ class GoogleMapConfig(fromJSONObject: JSONObject) {
         x = fromJSONObject.getInt("x")
         y = fromJSONObject.getInt("y")
         zoom = fromJSONObject.getInt("zoom")
+        minZoom = fromJSONObject.getInt("minZoom")
+        maxZoom = fromJSONObject.getInt("maxZoom")
 
         val lat = centerJSONObject.getDouble("lat")
         val lng = centerJSONObject.getDouble("lng")

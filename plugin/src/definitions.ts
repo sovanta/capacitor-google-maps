@@ -174,6 +174,14 @@ export interface GoogleMapConfig extends google.maps.MapOptions {
    */
   zoom: number;
   /**
+   * Sets the minimal zoom level of the map.
+   */
+  minZoom?: number;
+  /**
+   * Sets the maximum zoom level of the map.
+   */
+  maxZoom?: number;
+  /**
    * Enables image-based lite mode on Android.
    *
    * @default false

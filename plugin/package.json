@@ -1,6 +1,6 @@
 {
   "name": "@capacitor/google-maps",
-  "version": "6.0.0-rc.0",
+  "version": "5.4.1",
   "description": "Google maps on Capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -24,58 +24,62 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ionic-team/capacitor-google-maps.git"
+    "url": "git+https://github.com/ionic-team/capacitor-plugins.git"
   },
   "bugs": {
-    "url": "https://github.com/ionic-team/capacitor-google-maps/issues"
+    "url": "https://github.com/ionic-team/capacitor-plugins/issues"
   },
   "keywords": [
     "capacitor",
     "plugin",
-    "native",
-    "google-maps"
+    "native"
   ],
   "scripts": {
-    "verify": "pnpm run verify:ios && pnpm run verify:android && pnpm run verify:web",
+    "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
     "verify:ios": "cd ios && pod install && xcodebuild -workspace Plugin.xcworkspace -scheme Plugin -sdk iphonesimulator && cd ..",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
-    "verify:web": "pnpm run build",
-    "lint": "pnpm eslint . --ext ts && pnpm prettier \"./**/*.{css,html,ts,js,java}\" --check && pnpm node-swiftlint lint",
-    "fmt": "pnpm eslint . --ext ts --fix && pnpm prettier \"./**/*.{css,html,ts,js,java}\" --write && pnpm node-swiftlint --fix --format",
+    "verify:web": "npm run build",
+    "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
+    "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
+    "eslint": "eslint . --ext ts",
+    "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
+    "swiftlint": "node-swiftlint",
     "docgen": "docgen --api GoogleMapInterface --output-readme README.md --output-json dist/docs.json",
-    "build": "pnpm run clean && pnpm run docgen && tsc && rollup -c rollup.config.js && pnpm run downleveldts",
+    "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js && npm run downlevel-dts",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
-    "prepublishOnly": "pnpm run build",
+    "prepublishOnly": "npm run build",
     "publish:cocoapod": "pod trunk push ./CapacitorGoogleMaps.podspec --allow-warnings",
-    "downleveldts": "pnpm downlevel-dts dist/typings dist/typings/ts_old --to=3.5",
-    "pack-local": "pnpm run build && pnpm pack && find . -name 'capacitor-google-maps-*tgz' -exec bash -c 'mv $0 capacitor-google-maps.tgz' {} \\; ",
+    "downlevel-dts": "npx downlevel-dts dist/typings dist/typings/ts_old --to=3.5",
+    "pack-local": "npm run build && npm pack && find . -name 'capacitor-google-maps-*tgz' -exec bash -c 'mv $0 capacitor-google-maps.tgz' {} \\; ",
     "unittest:ios": "xcodebuild test -project ./unit-tests/ios/GoogleMapsPlugin/GoogleMapsPlugin.xcodeproj -scheme TestApp -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.2' | xcpretty && exit ${PIPESTATUS[0]}",
     "unittest:android": "cd ./unit-tests/android && ./gradlew testDebugUnitTest"
   },
   "devDependencies": {
-    "@capacitor/android": "next",
-    "@capacitor/core": "next",
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/core": "^5.0.0",
     "@capacitor/docgen": "0.2.2",
-    "@capacitor/ios": "next",
+    "@capacitor/ios": "^5.0.0",
+    "@ionic/eslint-config": "^0.3.0",
     "@ionic/prettier-config": "^1.0.1",
     "@types/resize-observer-browser": "^0.1.7",
     "@types/supercluster": "^7.1.0",
     "downlevel-dts": "^0.7.0",
+    "eslint": "^7.11.0",
     "eslint-plugin-import": "^2.25.4",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
-    "@typescript-eslint/parser": "^5.59.2",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^8.8.0",
-    "prettier": "^2.8.8",
-    "prettier-plugin-java": "~2.1.0",
+    "prettier": "~2.3.0",
+    "prettier-plugin-java": "~1.0.2",
     "rimraf": "^3.0.2",
-    "rollup": "^2.78.1",
-    "swiftlint": "^1.0.2",
-    "typescript": "^5.4.2"
+    "rollup": "^2.32.0",
+    "swiftlint": "^1.0.1",
+    "typescript": "~4.1.5"
   },
   "peerDependencies": {
-    "@capacitor/core": "next"
+    "@capacitor/core": "^5.0.0"
+  },
+  "prettier": "@ionic/prettier-config",
+  "eslintConfig": {
+    "extends": "@ionic/eslint-config/recommended"
   },
   "capacitor": {
     "ios": {

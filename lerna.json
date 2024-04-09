@@ -9,6 +9,6 @@
     }
   },
   "version": "independent",
-  "npmClient": "pnpm",
+  "npmClient": "npm",
   "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }

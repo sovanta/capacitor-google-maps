@@ -9,6 +9,8 @@ public struct GoogleMapConfig: Codable {
     let center: LatLng
     let zoom: Double
     let styles: String?
+    let minZoom: Float?
+    let maxZoom: Float?
     var mapId: String?
 
     init(fromJSObject: JSObject) throws {
@@ -50,6 +52,18 @@ public struct GoogleMapConfig: Codable {
             self.styles = String(data: jsonData, encoding: .utf8)
         } else {
             self.styles = nil
+        }
+
+        if let minZoomJS = fromJSObject["minZoom"] as? Float {
+            self.minZoom = minZoomJS
+        } else {
+            self.minZoom = nil
+        }
+
+        if let maxZoomJS = fromJSObject["maxZoom"] as? Float {
+            self.maxZoom = maxZoomJS
+        } else {
+            self.maxZoom = nil
         }
 
         self.mapId = fromJSObject["iOSMapId"] as? String

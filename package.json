@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "prepare": "husky",
+    "prepare": "",
     "build": "lerna run build && yes | cp ./plugin/README.md ./README.md",
     "lint": "lerna run lint",
     "fmt": "lerna run fmt",

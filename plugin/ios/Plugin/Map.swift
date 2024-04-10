@@ -130,6 +130,12 @@ public class Map {
                 }
             }
 
+            if let minZoom = self.config.minZoom {
+                if let maxZoom = self.config.maxZoom {
+                    self.mapViewController.GMapView.setMinZoom(minZoom, maxZoom: maxZoom)
+                }
+            }
+
             self.delegate.notifyListeners("onMapReady", data: [
                 "mapId": self.id
             ])
